@@ -23,11 +23,10 @@ public class GetUsersServlet extends HttpServlet {
         Set<User> users = warehouse.getUsers();
         req.setAttribute("users", users);
         RequestDispatcher view = req.getRequestDispatcher("jsp/users.jsp");
-        view.forward(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        try {
+            view.forward(req, resp);
+        } catch (ServletException | IOException e) {
+            e.printStackTrace();
+        }
     }
 }

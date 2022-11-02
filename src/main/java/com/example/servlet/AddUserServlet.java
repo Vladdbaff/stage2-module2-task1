@@ -17,7 +17,11 @@ public class AddUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher view = req.getRequestDispatcher("jsp/add.jsp");
-        view.forward(req, resp);
+        try {
+            view.forward(req, resp);
+        } catch (ServletException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -31,6 +35,11 @@ public class AddUserServlet extends HttpServlet {
         warehouse.addUser(user);
 
         req.setAttribute("user", user);
-        resp.sendRedirect("/add");
+
+        try{
+            resp.sendRedirect("/add");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
